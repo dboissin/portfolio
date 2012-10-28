@@ -1,0 +1,13 @@
+@(person: Person)
+
+@main("person") {
+
+@person.id.map{ id =>
+<h2>@id</h2>
+}
+<h3>@person.name</h3>
+<p>
+  @person.email.getOrElse { <em>Not specified</em> } 
+</p>
+
+}

@@ -1,0 +1,42 @@
+@(personForm: Form[Person])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+
+@main("Persons") {
+
+@if(personForm.hasErrors) {
+<div class="alert-message error">
+  <p><strong>Oops</strong> Please fix all errors</p>
+</div>
+}
+
+@helper.form(action = routes.Persons.submit) {
+
+<fieldset>
+  <legend>General informations</legend>
+  @personForm("id").value.map{ id =>
+    <input type="hidden" name="id" value="@id" />
+  }
+
+  @inputText(
+  personForm("name"), 
+  '_label -> "Name"
+  )
+
+  @inputText(
+  personForm("email"), 
+  '_label -> "Mail"
+  )
+
+</fieldset>
+
+<div class="actions">
+  <input type="submit" class="btn primary" value="Insert">
+  <a href="@routes.Application.index" class="btn">Cancel</a>
+</div>
+
+}
+}
+
