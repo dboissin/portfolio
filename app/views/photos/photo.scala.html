@@ -1,0 +1,18 @@
+@(photo: Photo)
+
+@main(photo.name) {
+<div class="row">
+  <div class="span8">
+    <img src="@routes.Photos.image("n", photo.path)" class="img-polaroid" />
+  </div>
+  <div class="span4">
+    <div class="photo-desc-block">
+    <h1>@photo.name</h1>
+    @photo.description.map { desc =>
+      <em>@desc</em>
+    }
+  </div>
+  </div>
+</div>
+}
+

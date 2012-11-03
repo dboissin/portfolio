@@ -17,7 +17,7 @@ object Global extends GlobalSettings {
       db.withSession {
         val ddl = Persons.ddl ++ Photos.ddl ++ Galleries.ddl ++ Categories.ddl ++ CategoriesToPhotos.ddl ++ GalleriesToPhotos.ddl ++ PersonsToPhotos.ddl
         Logger.debug(ddl.createStatements.reduceLeft(_ + _))
-        ddl.create
+        //ddl.create
       }
     }
   }

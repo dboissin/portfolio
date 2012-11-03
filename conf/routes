@@ -5,6 +5,12 @@
 # Home page
 GET     /                           controllers.Application.index
 
+GET     /galleries                  controllers.Galleries.index
+GET     /gallery/:id                controllers.Galleries.gallery(id: Long)
+
+GET     /photo/:id                  controllers.Photos.photo(id: Long)
+GET     /image/:size/*path          controllers.Photos.image(size:String, path: String)
+
 GET     /person/form                controllers.Persons.form(id: Option[Long])
 POST    /person/form                controllers.Persons.submit
 

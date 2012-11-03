@@ -1,0 +1,20 @@
+@(gallery: Gallery, photos: List[Photo])
+
+@main(gallery.name) {
+
+  <div class="hero-unit">
+    <h1>@gallery.name</h1>
+    <p>@gallery.description.getOrElse("")</p>
+  </div>
+
+  <ul class="thumbnails">
+    @photos.map { photo =>
+    <li class="span3">
+      <a class="thumbnail" href="@routes.Photos.photo(photo.id.getOrElse(0))">
+        <img src="@routes.Photos.image("t", photo.path)" alt="@photo.name" title="@photo.name" />
+      </a>
+    </li>
+    }
+  </ul>
+}
+

@@ -1,0 +1,26 @@
+@(galleries: List[Gallery])
+
+@main(Messages("galleries")) {
+
+  <div class="hero-unit">
+    <h1>@Messages("galleries")</h1>
+    <p>@Messages("galleries.description")</p>
+  </div>
+
+  <ul class="thumbnails">
+    @galleries.map { gal =>
+    <li class="span4">
+      <div class="thumbnail">
+        <a href="@routes.Galleries.gallery(gal.id.getOrElse(0))">
+          <img src="/assets/images/Stack.png" alt="@gal.name" title="@gal.name" />
+          <div class="caption">
+            <h3>@gal.name</h3>
+            <p>@gal.description.getOrElse("")</p>
+          </div>
+        </a>
+      </div>
+    </li>
+    }
+  </ul>
+}
+

@@ -1,0 +1,46 @@
+body {
+  background-image: url("../images/bg.jpg");
+}
+
+.span1:nth-child(13), .span2:nth-child(7), .span3:nth-child(5), .span4:nth-child(4) {
+  clear: both;
+}
+
+.thumbnail {
+  background-color: #EFEFEF;
+}
+
+.thumbnail a:hover {
+  text-decoration: none;
+}
+
+.hero-unit {
+  border: 1px solid #C8C8C8;
+  padding: 20px;
+  background-color: #EFEFEF;
+}
+
+.hero-unit h1 {
+  font-size: 50px;
+}
+
+.photo-desc-block {
+  background-color: #efefef;
+  background-repeat: repeat-x;
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#ffffff), to(#efefef));
+  background-image: -moz-linear-gradient(top, #ffffff, #efefef);
+  background-image: -ms-linear-gradient(top, #ffffff, #efefef);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(100%, #efefef));
+  background-image: -webkit-linear-gradient(top, #ffffff, #efefef);
+  background-image: -o-linear-gradient(top, #ffffff, #efefef);
+  background-image: linear-gradient(top, #ffffff, #efefef);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#efefef', GradientType=0);
+  -webkit-box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+}
+
