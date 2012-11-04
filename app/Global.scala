@@ -16,7 +16,7 @@ object Global extends GlobalSettings {
     if (Play.isDev) {
       db.withSession {
         val ddl = Persons.ddl ++ Photos.ddl ++ Galleries.ddl ++ Categories.ddl ++ CategoriesToPhotos.ddl ++ GalleriesToPhotos.ddl ++ PersonsToPhotos.ddl
-        Logger.debug(ddl.createStatements.reduceLeft(_ + _))
+        Logger.debug(ddl.createStatements.reduceLeft(_ + _ + "\n"))
         //ddl.create
       }
     }
