@@ -10,10 +10,15 @@ object ApplicationBuild extends Build {
     val appDependencies = Seq(
       jdbc,
       "com.typesafe" % "slick_2.10.0-RC1" % "0.11.2",
+      "org.openimaj" % "core" % "1.0.5",
+      "org.openimaj" % "faces" % "1.0.5",
+      "org.imgscalr" % "imgscalr-lib" % "4.2",
+      "com.drewnoakes" % "metadata-extractor" % "2.6.2",
       "postgresql" % "postgresql" % "9.1-901-1.jdbc4"
     )
 
     val main = play.Project(appName, appVersion, appDependencies).settings(
+      resolvers += "OpenIMAJ repository" at "http://maven.openimaj.org"
     )
 
 }
