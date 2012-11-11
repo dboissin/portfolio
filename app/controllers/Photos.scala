@@ -3,9 +3,17 @@ package controllers
 import play.api._
 import play.api.mvc._
 import Play.current
+import play.api.libs.concurrent._
+
+import akka.actor._
+import akka.routing._
+import akka.pattern.ask
+import akka.util.Timeout
 
 import java.io.File
+import java.util.concurrent.TimeUnit
 
+import actors._
 import models.{ Photo, Photos => Ps }
 
 object Photos extends Controller {
@@ -41,5 +49,12 @@ object Photos extends Controller {
       NotFound
     }
   }
+
+  def testImportImages = Action {
+    val env = Akka.system.actorOf(Props[ImportImagesActor])
+    env ! ImportDirectory("/Users/mumu/tmpportfolio/test01", Nil, Nil)
+    Ok
+  }
+ 
 }
 

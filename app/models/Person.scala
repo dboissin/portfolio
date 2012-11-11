@@ -3,6 +3,7 @@ package models
 import scala.slick.driver.PostgresDriver.simple._
 import Database.threadLocalSession
 import play.api.db.DB
+import play.api.Play
 import play.api.Play.current
 
 class UserStatus(status: String)
@@ -35,6 +36,14 @@ object Person {
       id.map(idx => l.filterNot(_._1 == idx))
       .getOrElse(l)
       .size > 0
+  }
+
+  def userHome(user: Long = 0) = {
+    if (user > 0) {
+      None // Not implemented yet
+    } else {
+      Play.configuration.getString("root.images")
+    }
   }
 
 }
