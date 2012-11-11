@@ -50,6 +50,10 @@ object Photos extends Controller {
     }
   }
 
+  def create = Action {
+   Ok(views.html.photos.create(Nil, Nil, Nil))
+  }
+
   def testImportImages = Action {
     val env = Akka.system.actorOf(Props[ImportImagesActor])
     env ! ImportDirectory("/Users/mumu/tmpportfolio/test01", Nil, Nil)

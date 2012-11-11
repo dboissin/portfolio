@@ -24,7 +24,7 @@ body {
   font-size: 50px;
 }
 
-.photo-desc-block {
+.photo-desc-block, .page-block {
   background-color: #efefef;
   background-repeat: repeat-x;
   background-image: -khtml-gradient(linear, left top, left bottom, from(#ffffff), to(#efefef));

@@ -1,0 +1,60 @@
+@(directories: List[String], galleries: List[Gallery], categories: List[Category])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@main(Messages("photos.create.title")) {
+<div class="page-block">
+  <div class="page-header">
+    <h1>@Messages("photo.create.title") <small>@Messages("photo.create.subtitle")</small></h1>
+  </div>
+  <div class="row">
+    <div class="span5">
+      @directories.map{ dir =>
+
+      }
+      @helper.form(action = routes.Photos.create) {
+      <fieldset>
+        <legend>@Messages("photos.import")</legend>
+        <select>
+        @directories.map{ directory =>
+          <option value="@directory">@directory</option>
+        }
+        </select>
+        <input type="submit" class="btn primary" value="@Messages("send")" />
+      </fieldset>
+      }
+    </div>
+    <div class="span3">
+      <select multiple="multiple">
+      @categories.map{ category =>
+        <option value="@category.id">@category.name</option>
+      }
+      </select>
+      <form>
+      <fieldset>
+        <legend>@Messages("category.add")</legend>
+        <input type="text" name="category" />
+        <input type="button" value="@Messages("send")" />
+      </fieldset>
+    </form>
+    </div>
+    <div class="span3">
+      <select multiple="multiple">
+      @galleries.map{ gallery =>
+        <option value="@gallery.id">@gallery.name</option>
+      }
+      </select>
+      <form>
+      <fieldset>
+        <legend>@Messages("gallery.add")</legend>
+        <input type="text" name="gallery.name" />
+        <input type="text" name="gallery.description" />
+        <input type="button" value="@Messages("send")" />
+      </fieldset>
+    </form>
+    </div>
+  </div>
+  </div>
+}
+
