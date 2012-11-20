@@ -1,0 +1,11 @@
+@()
+
+@main("") {
+  <script type="text/javascript">
+    var source = new EventSource("/photos/test");
+    source.onmessage = function(event) {
+      console.log(event.data);
+    }
+  </script>
+}
+

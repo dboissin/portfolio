@@ -4,9 +4,14 @@ import akka.actor._
 import akka.routing._
 import akka.pattern.ask
 
+import play.api.libs.json._
+import play.api.libs.json.util._
+import play.api.libs.json.Writes._
+import play.api.libs.functional.syntax._
 import play.api.libs.concurrent._
 import play.api.Play.current
 import play.api.Logger
+import play.api.libs.iteratee._
 
 import java.io.File
 import scalax.file._
@@ -18,6 +23,11 @@ import models.Person
 trait ImportEvent
 case class ImportSuccess(path: String) extends ImportEvent
 case class ImportError(path: String, cause: String) extends ImportEvent
+
+object ImportImages {
+  implicit val importSuccessWrites = Json.writes[ImportSuccess]
+  implicit val importErrorWrites = Json.writes[ImportError]
+}
 
 case class ImportDirectory(path: String, categoriesIds: List[Long], galleriesIds: List[Long])
 case class ImportImage(img:File, ownerRootDir: String, categoriesIds: List[Long], galleriesIds: List[Long])
@@ -43,8 +53,10 @@ class ImportImageActor extends Actor {
 
 }
 
-class ImportImagesActor extends Actor {
+class ImportImagesActor(channel: Concurrent.Channel[JsValue]) extends Actor {
   val router = Akka.system.actorOf(Props[ImportImageActor].withRouter(RoundRobinRouter(4)))
+
+  import ImportImages._
 
   def receive = {
     case ImportDirectory(dir, categories, galleries) =>
@@ -56,12 +68,13 @@ class ImportImagesActor extends Actor {
               router ! ImportImage(img, ownerRoot, categories, galleries)
             )
           )
-        case None => sender ! ImportError(dir, "User home doesn't found.")
-        case _ => sender ! ImportError(dir, "Path isn't a directory.")
+        case None => channel.push(Json.toJson(ImportError(dir, "User home doesn't found.")))
+        case _ => channel.push(Json.toJson(ImportError(dir, "Path isn't a directory.")))
       }
 
     case event: ImportSuccess =>
-      sender ! event
+      Logger.debug("in actor" + event.toString)
+      channel.push(Json.toJson(event))
 
     case ImportError(path, message) =>
       Logger.error(path + " : " + message)

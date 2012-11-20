@@ -13,6 +13,7 @@ GET     /photo/:id                  controllers.Photos.photo(id: Long)
 GET     /image/:size/*path          controllers.Photos.image(size:String, path: String)
 GET     /photos/create              controllers.Photos.create
 GET     /photos/test                controllers.Photos.testImportImages
+GET     /tii                        controllers.Photos.tii
 
 GET     /person/form                controllers.Persons.form(id: Option[Long])
 POST    /person/form                controllers.Persons.submit
