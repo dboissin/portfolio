@@ -4,6 +4,7 @@ import play.api.Logger
 import play.api.libs.json._
 import play.api.libs.json.util._
 import play.api.libs.json.Writes._
+import play.api.libs.functional.syntax._
 
 import scala.collection.JavaConversions._
 
@@ -24,9 +25,9 @@ import org.openimaj.image.processing.face.detection.HaarCascadeDetector
 object ImageUtils {
 
   implicit val detectedFaceWrites = (
-    (__ \ "x").write[Int] ~
-    (__ \ "y").write[Int] ~
-    (__ \ "width").write[Int] ~
+    (__ \ "x").write[Int] and
+    (__ \ "y").write[Int] and
+    (__ \ "width").write[Int] and
     (__ \ "height").write[Int]
   )({face: DetectedFace =>
     (face.getBounds.x.toInt, face.getBounds.y.toInt, face.getBounds.width.toInt, face.getBounds.height.toInt)
