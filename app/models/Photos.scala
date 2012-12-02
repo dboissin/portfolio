@@ -2,6 +2,7 @@ package models
 
 import play.api.db.DB
 import play.api.Play.current
+import play.api.Logger
 
 import java.io.File
 import scala.slick.driver.PostgresDriver.simple._
@@ -14,10 +15,12 @@ object Photo {
   lazy val database = Database.forDataSource(DB.getDataSource())
 
   def create(path: String, meta: String, faces: String,
-    associateCategories: List[Long], associateGalleries: List[Long]): Int = 
+    associateCategories: List[Long], associateGalleries: List[Long]): Long =
     database.withTransaction {
-      Photos.insert(Photo(None, path, path.substring(path.lastIndexOf(File.separator)
-        + 1), None, Some(meta), Some(faces)))
+      val photoId = Photos.insert(Photo(None, path, path.substring(path.lastIndexOf(
+        File.separator) + 1), None, Some(meta), Some(faces)))
+      Logger.debug("create - photoId : " + photoId)
+      photoId
   }
 }
 
@@ -41,7 +44,7 @@ object Photos extends Table[Photo]("photos") {
   def forInsert = path ~ name ~ description ~ meta ~ faces <> (
     {(p, n, d, m, f) => Photo(None, p, n, d, m, f)},
     { p:Photo => Some((p.path, p.name, p.description, p.meta, p.faces))}
-  )
+  ) returning id
   def insert(photo: Photo) = forInsert.insert(photo)
 }
 

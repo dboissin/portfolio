@@ -44,7 +44,7 @@ class ImportImageActor extends Actor {
       val meta = ImageUtils.extractMetadata(img)
       val relativePath = img.getAbsolutePath.substring(ownerRootDirectory.length)
       val res = Photo.create(relativePath, meta, faces.toString, categories, galleries)
-      sender ! (if (res > 0) {
+      sender ! (if (res > 0L) {
         ImportSuccess(relativePath)
       } else {
         ImportError(relativePath, "Error when persist photo.")
