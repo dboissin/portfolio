@@ -68,8 +68,12 @@ class ImportImagesActor(channel: Concurrent.Channel[JsValue]) extends Actor {
               router ! ImportImage(img, ownerRoot, categories, galleries)
             )
           )
-        case None => channel.push(Json.toJson(ImportError(dir, "User home doesn't found.")))
-        case _ => channel.push(Json.toJson(ImportError(dir, "Path isn't a directory.")))
+        case None =>
+          channel.push(Json.toJson(ImportError(dir, "User home doesn't found.")))
+          channel.eofAndEnd()
+        case _ =>
+          channel.push(Json.toJson(ImportError(dir, "Path isn't a directory.")))
+          channel.eofAndEnd()
       }
 
     case event: ImportSuccess =>
