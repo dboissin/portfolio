@@ -6,14 +6,7 @@ object Fake {
 
   val galleries = List(
 
-      Gallery(Some(1), "Montpellier", Some("Un album qui vous plongera dans la ville")),
-      Gallery(Some(2), "Collioure", Some("""Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non erat sed massa mattis
-        vehicula.""")),
-      Gallery(Some(3), "Mpt", Some("Un album qui vous plongera dans la ville")),
-      Gallery(Some(4), "Montpellier", Some("Un album qui vous plongera dans la ville")),
-      Gallery(Some(5), "GT Drive", Some("""Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non erat sed massa mattis
-        vehicula.""")),
-      Gallery(Some(6), "Anniversaire d'Anaïs", Some("""Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non erat sed massa mattis
+      Gallery(Some(1), "GT Drive", Some("""Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non erat sed massa mattis
         vehicula."""))
   )
 
@@ -627,7 +620,7 @@ Photo(Some(1129), "08/23/20120823-000316/6648652029/IMG_0334.jpg", "blip", Some(
   }
 
   def listPhotos(galId: Long) = {
-    photos.splitAt(galId.toInt*100 - 100)._2.take(100)
+    photos.splitAt(galId.toInt*380 - 100)._2.take(36)
   }
 
   def findPhoto(id: Long) = {
