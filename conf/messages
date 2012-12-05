@@ -1,5 +1,10 @@
-app.title=Portfolio
+app.title=Awesome wedding
 signin=Connexion
 galleries=Albums
-galleries.description=Galeries de dboissin
+galleries.description=Galeries
+story=Histoire
+wedding.event=Le mariage
+guestbook=Livre d''or
+contact=Contact
+location=Plan d''accès
 

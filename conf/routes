@@ -4,7 +4,11 @@
 
 # Home page
 GET     /                           controllers.Application.index
-GET     /test                       controllers.Application.test
+GET     /story                      controllers.Application.story
+GET     /wedding                    controllers.Application.wedding
+GET     /location                   controllers.Application.location
+GET     /guestbook                  controllers.Application.guestbook
+GET     /contact                    controllers.Application.contact
 
 GET     /galleries                  controllers.Galleries.index
 GET     /gallery/:id                controllers.Galleries.gallery(id: Long)
