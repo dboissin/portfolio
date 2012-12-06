@@ -21,10 +21,6 @@ object Application extends Controller {
     Ok(views.html.location())
   }
 
-  def guestbook = Action {
-    Ok(views.html.guestbook())
-  }
-
   def contact = Action {
     Ok(views.html.contact())
   }

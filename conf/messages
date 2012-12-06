@@ -7,4 +7,9 @@ wedding.event=Le mariage
 guestbook=Livre d''or
 contact=Contact
 location=Plan d''accès
+guestbook.body.label=Corps du message
+guestbook.title.label=Titre
+guestbook.errors=Le formulaire contient des erreurs
+insert=Valider
+cancel=Annuler
 

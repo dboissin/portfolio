@@ -15,9 +15,9 @@ object Global extends GlobalSettings {
   override def onStart(app: Application) {
     if (Play.isDev) {
       db.withSession {
-        val ddl = Persons.ddl ++ Photos.ddl ++ Galleries.ddl ++ Categories.ddl ++ CategoriesToPhotos.ddl ++ GalleriesToPhotos.ddl ++ PersonsToPhotos.ddl
+        val ddl = Persons.ddl ++ Photos.ddl ++ Galleries.ddl ++ Categories.ddl ++ CategoriesToPhotos.ddl ++ GalleriesToPhotos.ddl ++ PersonsToPhotos.ddl ++ GuestbookItems.ddl
         Logger.debug(ddl.createStatements.reduceLeft(_ + _ + "\n"))
-        //ddl.create
+        // ddl.create
       }
     }
   }

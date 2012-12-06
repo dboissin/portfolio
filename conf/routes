@@ -7,7 +7,6 @@ GET     /                           controllers.Application.index
 GET     /story                      controllers.Application.story
 GET     /wedding                    controllers.Application.wedding
 GET     /location                   controllers.Application.location
-GET     /guestbook                  controllers.Application.guestbook
 GET     /contact                    controllers.Application.contact
 
 GET     /galleries                  controllers.Galleries.index
@@ -22,6 +21,8 @@ GET     /tii                        controllers.Photos.tii
 GET     /person/form                controllers.Persons.form(id: Option[Long])
 POST    /person/form                controllers.Persons.submit
 
+GET     /guestbook                  controllers.Guestbook.guestbook
+POST    /guestbook                  controllers.Guestbook.addMessage
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

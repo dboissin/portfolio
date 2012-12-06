@@ -1,0 +1,67 @@
+@(messageForm: Form[GuestbookItem], messages: List[GuestbookItem])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+
+@main(Messages("guestbook")) {
+
+<div class="page-block center-page">
+  <div class="page-header"></div>
+  <h3>@Messages("guestbook")</h3>
+  <div class="row">
+    <div class="span3"></div>
+    <div class="span8">
+      @messages.map{ message =>
+      <div class="message-block">
+        <h3 class="popover-title">@message.title</h3>
+        <div class="popover-content">
+          <p>@Html(message.body.replaceAll("\n","<br />"))</p>
+        </div>
+      </div>
+      <br />
+      }
+    </div>
+  </div>
+
+  <br />
+
+  <div class="row guestbook">
+    <div class="span3"></div>
+    <div class="span8">
+@if(messageForm.hasErrors) {
+<div class="alert-message error">
+  <p><strong>Oops</strong> @Messages("guestbook.errors")</p>
+</div>
+}
+
+@helper.form(action = routes.Guestbook.addMessage) {
+
+  @messageForm("id").value.map{ id =>
+    <input type="hidden" name="id" value="@id" />
+  }
+
+  @inputText(
+  messageForm("title"),
+  '_label -> Messages("guestbook.title.label"),
+  '_help -> ""
+  )
+
+  @textarea(
+    messageForm("body"),
+    '_label -> Messages("guestbook.body.label"),
+    '_help -> "",
+    'rows -> 5
+  )
+
+<div class="actions">
+  <input type="submit" class="btn primary" value="@Messages("insert")">
+  <a href="@routes.Guestbook.guestbook" class="btn">@Messages("cancel")</a>
+</div>
+
+}
+</div>
+</div>
+</div>
+}
+
