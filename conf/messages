@@ -2,4 +2,5 @@ app.title=Portfolio
 signin=Connexion
 galleries=Albums
 galleries.description=Galeries de dboissin
+notfound=La page est introuvable.
 

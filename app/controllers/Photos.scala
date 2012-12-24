@@ -7,6 +7,10 @@ import play.api.libs.concurrent._
 import play.api.libs.iteratee._
 import play.api.libs.json._
 import play.api.libs.EventSource
+import scala.slick.driver.PostgresDriver.simple._
+import Database.threadLocalSession
+import play.api.db.DB
+import play.api.Play.current
 
 import akka.actor._
 import akka.routing._
@@ -19,15 +23,18 @@ import models.{ Photo, Photos => Ps }
 object Photos extends Controller {
 
   val rootImages = Play.configuration.getString("root.images").getOrElse("")
+  lazy val database = Database.forDataSource(DB.getDataSource())
 
   def index = Action {
     Ok
   }
 
   def photo(id: Long) = Action {
-    Fake.findPhoto(id).map( photo =>
-      Ok(views.html.photos.photo(photo))
-    ).getOrElse(NotFound)
+    database.withSession {
+      (for{ p <- Ps if (p.id === id)} yield p).list.headOption.map(photo =>
+        Ok(views.html.photos.photo(photo))
+      )
+    }.getOrElse(NotFound(views.html.errors.notFound()))
   }
 
   def image(size: String, path: String) = Action {
