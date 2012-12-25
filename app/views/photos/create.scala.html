@@ -1,4 +1,4 @@
-@(directories: List[String], galleries: List[Gallery], categories: List[Category])
+@(directories: List[scalax.file.Path], galleries: List[Gallery], categories: List[Category])
 
 @import helper._
 @import helper.twitterBootstrap._
@@ -10,15 +10,12 @@
   </div>
   <div class="row">
     <div class="span5">
-      @directories.map{ dir =>
-
-      }
       @helper.form(action = routes.Photos.create) {
       <fieldset>
         <legend>@Messages("photos.import")</legend>
-        <select>
+        <select class="input-xlarge">
         @directories.map{ directory =>
-          <option value="@directory">@directory</option>
+          <option value="@directory.path">@directory.name</option>
         }
         </select>
         <input type="submit" class="btn primary" value="@Messages("send")" />
@@ -35,7 +32,7 @@
       <fieldset>
         <legend>@Messages("category.add")</legend>
         <input type="text" name="category" />
-        <input type="button" value="@Messages("send")" />
+        <input type="submit" class="btn" value="@Messages("send")" />
       </fieldset>
     </form>
     </div>

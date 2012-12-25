@@ -16,13 +16,18 @@ import akka.actor._
 import akka.routing._
 
 import java.io.File
+import scalax.file.Path
+import scalax.file.PathMatcher._
 
 import actors._
 import models.{ Photo, Photos => Ps }
+import models.{Galleries => Gals }
+import models.{Categories => Cats}
 
 object Photos extends Controller {
 
   val rootImages = Play.configuration.getString("root.images").getOrElse("")
+  lazy val imagesPath = Path.fromString(rootImages)
   lazy val database = Database.forDataSource(DB.getDataSource())
 
   def index = Action {
@@ -58,7 +63,12 @@ object Photos extends Controller {
   }
 
   def create = Action {
-   Ok(views.html.photos.create(Nil, Nil, Nil))
+    val folders = imagesPath.descendants(IsDirectory).toList
+    database.withSession {
+      val galleries = (for (g <- Gals) yield g).list
+      val categories = (for (c <- Cats) yield c).list
+      Ok(views.html.photos.create(folders, galleries, categories))
+    }
   }
 
   def tii = Action {
