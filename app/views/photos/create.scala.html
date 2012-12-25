@@ -45,14 +45,14 @@
         <option value="@gallery.id">@gallery.name</option>
       }
       </select>
-      <form>
+      @helper.form(action = routes.Galleries.addGallery) {
       <fieldset>
         <legend>@Messages("gallery.add")</legend>
         <input type="text" name="gallery.name" />
         <input type="text" name="gallery.description" />
-        <input type="button" value="@Messages("send")" />
+        <input type="submit" class="btn" value="@Messages("send")" />
       </fieldset>
-    </form>
+      }
     </div>
   </div>
   </div>

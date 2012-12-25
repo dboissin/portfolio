@@ -8,6 +8,7 @@ GET     /test                       controllers.Application.test
 
 GET     /galleries                  controllers.Galleries.index
 GET     /gallery/:id                controllers.Galleries.gallery(id: Long)
+POST    /gallery                    controllers.Galleries.addGallery
 
 GET     /photo/:id                  controllers.Photos.photo(id: Long)
 GET     /image/:size/*path          controllers.Photos.image(size:String, path: String)
