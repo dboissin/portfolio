@@ -28,13 +28,13 @@
         <option value="@category.id">@category.name</option>
       }
       </select>
-      <form>
+      @helper.form(action = routes.Categories.addCategory) {
       <fieldset>
         <legend>@Messages("category.add")</legend>
-        <input type="text" name="category" />
-        <input type="submit" class="btn" value="@Messages("send")" />
+        <input type="text" name="category.name" />
+        <input type="submit" class="btn" value="@Messages("btn.add")" />
       </fieldset>
-    </form>
+      }
     </div>
     <div class="span3">
       <select multiple="multiple">
@@ -47,7 +47,7 @@
         <legend>@Messages("gallery.add")</legend>
         <input type="text" name="gallery.name" />
         <input type="text" name="gallery.description" />
-        <input type="submit" class="btn" value="@Messages("send")" />
+        <input type="submit" class="btn" value="@Messages("btn.add")" />
       </fieldset>
       }
     </div>

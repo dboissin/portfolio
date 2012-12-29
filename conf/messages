@@ -3,4 +3,7 @@ signin=Connexion
 galleries=Albums
 galleries.description=Galeries de dboissin
 notfound=La page est introuvable.
+btn.add=Ajouter
+category.add=Ajouter une categorie
+gallery.add=Ajouter une galerie
 

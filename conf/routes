@@ -16,6 +16,8 @@ GET     /photos/create              controllers.Photos.create
 GET     /photos/test                controllers.Photos.testImportImages
 GET     /tii                        controllers.Photos.tii
 
+POST    /category                   controllers.Categories.addCategory
+
 GET     /person/form                controllers.Persons.form(id: Option[Long])
 POST    /person/form                controllers.Persons.submit
 
