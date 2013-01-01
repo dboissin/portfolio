@@ -87,17 +87,5 @@ object Photos extends Controller {
     Ok.stream(out &> EventSource()).as(play.api.http.ContentTypes.EVENT_STREAM)
   }
 
-  def tii = Action {
-    Ok(views.html.test())
-  }
-
-  def testImportImages = Action {
-    val out = Concurrent.unicast[JsValue] { channel =>
-      val env = Akka.system.actorOf(Props(new ImportImagesActor(channel)))
-      env ! ImportDirectory("/Users/mumu/tmpportfolio/test01", Nil, Nil)
-      }
-    Ok.stream(out &> EventSource()).as(play.api.http.ContentTypes.EVENT_STREAM)
-  }
-
 }
 
