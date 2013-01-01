@@ -19,9 +19,16 @@ object Photo {
     database.withTransaction {
       val photoId = Photos.insert(Photo(None, path, path.substring(path.lastIndexOf(
         File.separator) + 1), None, Some(meta), Some(faces)))
+      CategoriesToPhotos.insertAll(
+        associateCategories.map(categoryId => (categoryId, photoId)) : _*
+      )
+      GalleriesToPhotos.insertAll(
+        associateGalleries.map(galleryId => (galleryId, photoId)) : _*
+      )
       Logger.debug("create - photoId : " + photoId)
       photoId
   }
+
 }
 
 

@@ -44,3 +44,7 @@ body {
   border-radius: 6px;
 }
 
+.hidden {
+  display: none;
+}
+

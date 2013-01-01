@@ -13,8 +13,7 @@ POST    /gallery                    controllers.Galleries.addGallery
 GET     /photo/:id                  controllers.Photos.photo(id: Long)
 GET     /image/:size/*path          controllers.Photos.image(size:String, path: String)
 GET     /photos/create              controllers.Photos.create
-GET     /photos/test                controllers.Photos.testImportImages
-GET     /tii                        controllers.Photos.tii
+GET     /photos/import              controllers.Photos.importImages(path: String, galleries: String, categories: String)
 
 POST    /category                   controllers.Categories.addCategory
 

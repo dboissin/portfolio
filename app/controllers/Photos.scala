@@ -18,6 +18,7 @@ import akka.routing._
 import java.io.File
 import scalax.file.Path
 import scalax.file.PathMatcher._
+import scala.util.control.Exception
 
 import actors._
 import models.{ Photo, Photos => Ps }
@@ -69,6 +70,21 @@ object Photos extends Controller {
       val categories = (for (c <- Cats) yield c).list
       Ok(views.html.photos.create(folders, galleries, categories))
     }
+  }
+
+  def importImages(path: String, galleries: String, categories: String) = Action {
+    // TODO check galleries and categories existance.
+    val categoriesIds = categories.split(",").map(id =>
+      Exception.catching(classOf[NumberFormatException]).opt(id.toLong)
+    ).toList.flatten
+    val galleriesIds = galleries.split(",").map(id =>
+      Exception.catching(classOf[NumberFormatException]).opt(id.toLong)
+    ).toList.flatten
+    val out = Concurrent.unicast[JsValue] { channel =>
+      val env = Akka.system.actorOf(Props(new ImportImagesActor(channel)))
+      env ! ImportDirectory(path, categoriesIds, galleriesIds)
+    }
+    Ok.stream(out &> EventSource()).as(play.api.http.ContentTypes.EVENT_STREAM)
   }
 
   def tii = Action {
