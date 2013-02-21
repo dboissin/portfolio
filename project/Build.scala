@@ -9,7 +9,7 @@ object ApplicationBuild extends Build {
 
     val appDependencies = Seq(
       jdbc,
-      "com.typesafe" % "slick_2.10.0-RC1" % "0.11.2",
+      "com.typesafe.slick" %% "slick" % "1.0.0",
       "org.openimaj" % "core" % "1.0.5",
       "org.openimaj" % "faces" % "1.0.5",
       "org.imgscalr" % "imgscalr-lib" % "4.2",
