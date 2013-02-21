@@ -5,16 +5,12 @@ import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
 import play.api.data.validation.Constraints._
-import scala.slick.driver.PostgresDriver.simple._
+import scala.slick.driver.BasicDriver.simple._
 import Database.threadLocalSession
-import play.api.db.DB
-import play.api.Play.current
 
 import models.{ Gallery, Galleries => Gals }
 
-object Galleries extends Controller {
-
-  lazy val database = Database.forDataSource(DB.getDataSource())
+object Galleries extends Controller with DBSession {
 
   val galleryForm = Form(
     mapping(
@@ -36,17 +32,15 @@ object Galleries extends Controller {
     }.getOrElse(NotFound)
   }
 
-  def addGallery = Action { implicit request =>
+  def addGallery = DBAction { implicit request =>
     galleryForm.bindFromRequest.fold(
       errors => {
         Logger.debug(errors.toString)
         BadRequest
       },
       gallery => {
-        database.withSession {
-          Gals.insert(gallery)
-          Ok
-        }
+        Gals.insert(gallery)
+        Ok
       }
     )
   }

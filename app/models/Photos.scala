@@ -5,7 +5,7 @@ import play.api.Play.current
 import play.api.Logger
 
 import java.io.File
-import scala.slick.driver.PostgresDriver.simple._
+import scala.slick.driver.BasicDriver.simple._
 import Database.threadLocalSession
 
 case class Photo(id: Option[Long], path: String, name: String, description: Option[String], meta: Option[String], faces: Option[String])
